@@ -1,0 +1,37 @@
+from langchain_text_splitters import HTMLHeaderTextSplitter
+
+
+html_string = """
+<!DOCTYPE html>
+<html>
+<body>
+    <div>
+        <h1>Foo</h1>
+        <p>Some intro text about Foo.</p>
+        <div>
+            <h2>Bar main section</h2>
+            <p>Some intro text about Bar.</p>
+            <h3>Bar subsection 1</h3>
+            <p>Some text about the first subtopic of Bar.</p>
+            <h3>Bar subsection 2</h3>
+            <p>Some text about the second subtopic of Bar.</p>
+        </div>
+        <div>
+            <h2>Baz</h2>
+            <p>Some text about Baz</p>
+        </div>
+        <br>
+        <p>Some concluding text about Foo</p>
+    </div>
+</body>
+</html>
+"""
+header_to_split_On  = [
+    ("h1",'header1'),
+    ("h2",'header2'),
+    ("h3",'header3')
+]
+
+html_splitter = HTMLHeaderTextSplitter(headers_to_split_on = header_to_split_On)
+result  = html_splitter.split_text(html_string)
+print(result[2])
